@@ -1,25 +1,46 @@
-import logo from './logo.svg';
+import '../src/Components/fontawesome-free-6.0.0-web/css/all.css'
 import './App.css';
+import Content from './Components/Contents/content';
+import Footer from './Components/Footer/footer';
+import Header from './Components/Header/header';
+import Nav from './Components/Navigator/nav';
+import { useEffect } from 'react'
+import { connect } from 'react-redux';
 
-function App() {
+
+function App(props) {
+
+  const handleLoad = () => {
+    props.callApi()
+  }
+
+  useEffect(() => {
+    window.addEventListener('load', handleLoad)
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Nav />
+      <Content />
+      <Footer />
     </div>
   );
 }
 
-export default App;
+
+const mapStateToProps = (state) => {
+  return (
+    {
+      dataRedux: state.listFilm
+    }
+  )
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return ({
+    callApi: () => dispatch({ type: 'CALL_API' })
+  })
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
