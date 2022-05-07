@@ -1,7 +1,6 @@
 import './cardphim.scss'
 
 const CardPhim = (props) => {
-    console.log("Check CardPhim:", props.itemPhim)
     return (
         <div className='cardPhim'>
             <div className='cardphim-conent'>

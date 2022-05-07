@@ -1,13 +1,4 @@
 import './home.scss'
-import truonghanhca from '../../../Assets/Images/truonghanhca.jpg'
-import ngocrong from '../../../Assets/Images/7vienngocrong.jpg'
-import chienbinhmuadong from '../../../Assets/Images/chienbinhmuadong.jpg'
-import chuatechiecnhan from '../../../Assets/Images/chuatechiecnhan.jpg'
-import kingsman from '../../../Assets/Images/kingsman.jpg'
-import loki1 from '../../../Assets/Images/loki1.jpg'
-import minhlan from '../../../Assets/Images/minhlan.jpg'
-import trutien2 from '../../../Assets/Images/trutien2.jpg'
-import thieunien from '../../../Assets/Images/thieunientudaidanhbo.jpg'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -15,9 +6,6 @@ import { connect } from 'react-redux'
 import { useEffect, useState } from 'react'
 
 import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
     Link
 } from "react-router-dom";
 import CardPhim from '../Card/cardphim'
@@ -87,33 +75,18 @@ const Home = (props) => {
                 <div className='home-content'>
                     <div className='home-banner'>
                         <Slider {...settings}>
-                            <div className='banner'>
-                                <img src={truonghanhca} alt="Trường ca hành"></img>
-                            </div>
-                            <div className='banner'>
-                                <img src={ngocrong} alt="7 Viên Ngọc Rồng"></img>
-                            </div>
-                            <div className='banner'>
-                                <img src={chienbinhmuadong} alt="Chiến Binh Mùa Đông"></img>
-                            </div>
-                            <div className='banner'>
-                                <img src={chuatechiecnhan} alt="Chúa tể của những chiếc nhẫn"></img>
-                            </div>
-                            <div className='banner'>
-                                <img src={kingsman} alt="KingsMan"></img>
-                            </div>
-                            <div className='banner'>
-                                <img src={loki1} alt="Loki 1"></img>
-                            </div>
-                            <div className='banner'>
-                                <img src={minhlan} alt="Minh lan truyện"></img>
-                            </div>
-                            <div className='banner'>
-                                <img src={trutien2} alt="Tru tiên 2 - Thanh Vân chí"></img>
-                            </div>
-                            <div className='banner'>
-                                <img src={thieunien} alt="Thiếu niên tứ đại danh bổ"></img>
-                            </div>
+                            {
+                                props.dataRedux.listBanner && props.dataRedux.listBanner.length &&
+                                props.dataRedux.listBanner.map((item, index) => {
+                                    return (
+                                        <div className='banner'>
+                                            <Link to={"/" + item.slug}>
+                                                <img src={item.url} alt={item.id}></img>
+                                            </Link>
+                                        </div>
+                                    )
+                                })
+                            }
                         </Slider>
                     </div>
 
@@ -130,11 +103,13 @@ const Home = (props) => {
                         </div>
                         <div className='phimbo-content'>
                             {
-                                phimBo && phimBo.length &&
-                                phimBo.map((item, index) => {
+                                props.dataRedux.phimbo && props.dataRedux.phimbo.length &&
+                                props.dataRedux.phimbo.map((item, index) => {
                                     return (
                                         index < 8 &&
-                                        <CardPhim itemPhim={item} key={index} />
+                                        <Link to={"/" + item.movie.slug}>
+                                            <CardPhim itemPhim={item} key={index} />
+                                        </Link>
                                     )
                                 })
                             }
@@ -154,11 +129,13 @@ const Home = (props) => {
                         </div>
                         <div className='phimbo-content'>
                             {
-                                phimLe && phimLe.length &&
-                                phimLe.map((item, index) => {
+                                props.dataRedux.phimle && props.dataRedux.phimle.length &&
+                                props.dataRedux.phimle.map((item, index) => {
                                     return (
                                         index < 8 &&
-                                        <CardPhim itemPhim={item} key={index} />
+                                        <Link to={"/" + item.movie.slug}>
+                                            <CardPhim itemPhim={item} key={index} />
+                                        </Link>
                                     )
                                 })
                             }
@@ -178,11 +155,13 @@ const Home = (props) => {
                         </div>
                         <div className='phimbo-content'>
                             {
-                                shows && shows.length &&
-                                shows.map((item, index) => {
+                                props.dataRedux.shows && props.dataRedux.shows.length &&
+                                props.dataRedux.shows.map((item, index) => {
                                     return (
                                         index < 8 &&
-                                        <CardPhim itemPhim={item} key={index} />
+                                        <Link to={"/" + item.movie.slug}>
+                                            <CardPhim itemPhim={item} key={index} />
+                                        </Link>
                                     )
                                 })
                             }
@@ -202,17 +181,18 @@ const Home = (props) => {
                         </div>
                         <div className='phimbo-content'>
                             {
-                                hoatHinh && hoatHinh.length &&
-                                hoatHinh.map((item, index) => {
+                                props.dataRedux.hoathinh && props.dataRedux.hoathinh.length &&
+                                props.dataRedux.hoathinh.map((item, index) => {
                                     return (
                                         index < 8 &&
-                                        <CardPhim itemPhim={item} key={index} />
+                                        <Link to={"/" + item.movie.slug}>
+                                            <CardPhim itemPhim={item} key={index} />
+                                        </Link>
                                     )
                                 })
                             }
                         </div>
                     </div>
-
                 </div>
             </div>
         </>

@@ -1,5 +1,5 @@
 .cardPhim{
-    width: 24.5%;
+    width: 100%;
     cursor: pointer;
     padding: 2px;
     margin-bottom: 20px;
@@ -28,5 +28,20 @@
             font-weight: 400;
             color: #fff;
         }
+    }
+}
+@media only screen and (max-width: 1024px) {
+    .cardPhim{
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .cardPhim{
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 480px) {
+    .cardPhim{
+        width: 100%;
     }
 }

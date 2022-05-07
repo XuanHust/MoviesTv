@@ -12,8 +12,32 @@ import Hoathinh from "../Contents/HoatHinh/hoathinh";
 import Show from "../Contents/Shows/show";
 import Home from "../Contents/Home/home";
 import "./nav.scss"
+import PhimDetail from "../Contents/phimDetail/phimDetail";
+import { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import PhimBoDetail from "../Contents/phimDetail/phimBoDetail";
+import PhimLeDetail from "../Contents/phimDetail/phimLeDetail";
+import HoatHinhDetail from "../Contents/phimDetail/hoatHinhDetail";
+import ShowsDetail from "../Contents/phimDetail/showsDetail";
 
-const Nav = () => {
+const Nav = (props) => {
+
+    const [phimBo, setPhimBo] = useState()
+    const [phimLe, setPhimLe] = useState()
+    const [shows, setShows] = useState()
+    const [hoatHinh, setHoatHinh] = useState()
+
+    const loadPhim = () => {
+        setPhimBo(props.dataRedux.phimbo)
+        setPhimLe(props.dataRedux.phimle)
+        setShows(props.dataRedux.shows)
+        setHoatHinh(props.dataRedux.hoathinh)
+    }
+
+    useEffect(() => {
+        window.addEventListener('load', loadPhim)
+    }, [])
+
     return (
         <Router>
             <div id="container-nav">
@@ -66,9 +90,56 @@ const Nav = () => {
                 <Route path="/danhsach/shows" element={<Show />} />
                 <Route path="/danhsach/hoathinh" element={<Hoathinh />} />
                 <Route path="/MoviesTv" element={<Home />} />
+                {
+                    props.dataRedux.listBanner.map((item, index) => {
+                        return(
+                            <Route path={'/'+item.slug} element={<PhimDetail infor={item}/>} />
+                        )
+                    })
+                }
+                {
+                    props.dataRedux.phimbo &&
+                    props.dataRedux.phimbo.map((item, index) => {
+                        return(
+                            <Route path={"/" + item.movie.slug} element={<PhimBoDetail infor={item}/>} />
+                        )
+                    })
+                }
+                {
+                    props.dataRedux.phimle &&
+                    props.dataRedux.phimle.map((item, index) => {
+                        return(
+                            <Route path={"/" + item.movie.slug} element={<PhimLeDetail infor={item}/>} />
+                        )
+                    })
+                }
+                {
+                    props.dataRedux.hoathinh &&
+                    props.dataRedux.hoathinh.map((item, index) => {
+                        return(
+                            <Route path={"/" + item.movie.slug} element={<HoatHinhDetail infor={item}/>} />
+                        )
+                    })
+                }
+                {
+                    props.dataRedux.shows &&
+                    props.dataRedux.shows.map((item, index) => {
+                        return(
+                            <Route path={"/" + item.movie.slug} element={<ShowsDetail infor={item}/>} />
+                        )
+                    })
+                }
             </Routes>
         </Router>
     )
 }
 
-export default Nav;
+const mapStateToProps = (state) => {
+    return (
+        {
+            dataRedux: state
+        }
+    )
+}
+
+export default connect(mapStateToProps)(Nav);
