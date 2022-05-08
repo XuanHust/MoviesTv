@@ -30,18 +30,20 @@
                 button{
                     position: absolute;
                     top: 90%;
-                    display: flex;
-                    align-items: center;
                     left: 35%;
                     cursor: pointer;
                     padding: 10px;
                     border-radius: 10px;
                     border: none;
                     background-color: rgb(207, 58, 17);
-                    font-size: 14px;
-                    font-weight: 600;
-                    color: #fff;
                     transition: all 0.3s ease;
+                    a{
+                        display: flex;
+                        align-items: center;
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: #fff;
+                    }
                     i{
                         margin-right: 5px;
                         font-size: 14px;

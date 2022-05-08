@@ -1,10 +1,11 @@
 import './phimdetail.scss'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
+import {
+    Link
+} from "react-router-dom";
 
-const PhimDetail = (props) => {
-
-    const phim = props.dataRedux.banner.filter(e => e.movie._id === props.infor.id)
-
+const PhimBoDetail = (props) => {
+    const phim = props.dataRedux.totalphim.filter(e => e.movie._id === props.infor.movie._id)
     return (
         <div className='phimdetail-container'>
             <div className='phimdetail-content'>
@@ -14,8 +15,10 @@ const PhimDetail = (props) => {
                             <img src={phim[0].movie.thumb_url} alt={phim[0].movie._id}></img>
                         </p>
                         <button type='button'>
-                            <i class="fa-solid fa-play"></i>
-                            <p>Xem Phim</p>
+                            <Link to={"/" + phim[0].episodes[0].server_data[0].filename + "x@"}>
+                                <i class="fa-solid fa-play"></i>
+                                <p>Xem Phim</p>
+                            </Link>
                         </button>
                     </div>
                     <div className='main-right'>
@@ -35,78 +38,78 @@ const PhimDetail = (props) => {
                             <p className='infor-left'>Thời lượng</p>
                             {
                                 phim[0].movie.time ?
-                                <p className='infor-right'>{phim[0].movie.time}</p>
-                                :
-                                <p className='infor-right'>N/A</p>
+                                    <p className='infor-right'>{phim[0].movie.time}</p>
+                                    :
+                                    <p className='infor-right'>N/A</p>
                             }
-                            
+
                         </p>
                         <p className='infor'>
                             <p className='infor-left'>Năm phát hành</p>
                             {
                                 phim[0].movie.year ?
-                                <p className='infor-right'>{phim[0].movie.year}</p>
-                                :
-                                <p className='infor-right'>N/A</p>
+                                    <p className='infor-right'>{phim[0].movie.year}</p>
+                                    :
+                                    <p className='infor-right'>N/A</p>
                             }
                         </p>
                         <p className='infor'>
                             <p className='infor-left'>Chất lượng</p>
                             {
                                 phim[0].movie.quality ?
-                                <p className='infor-right'>{phim[0].movie.quality}</p>
-                                :
-                                <p className='infor-right'>N/A</p>
+                                    <p className='infor-right'>{phim[0].movie.quality}</p>
+                                    :
+                                    <p className='infor-right'>N/A</p>
                             }
-                            
+
                         </p>
                         <p className='infor'>
                             <p className='infor-left'>Ngôn ngữ</p>
                             {
                                 phim[0].movie.lang ?
-                                <p className='infor-right'>{phim[0].movie.lang}</p>
-                                :
-                                <p className='infor-right'>N/A</p>
+                                    <p className='infor-right'>{phim[0].movie.lang}</p>
+                                    :
+                                    <p className='infor-right'>N/A</p>
                             }
-                            
+
                         </p>
                         <p className='infor'>
                             <p className='infor-left'>Đạo diễn</p>
                             {
                                 phim[0].movie.director[0] ?
-                                <p className='infor-right'>{phim[0].movie.director[0]}</p>
-                                :
-                                <p className='infor-right'>N/A</p>
+                                    <p className='infor-right'>{phim[0].movie.director[0]}</p>
+                                    :
+                                    <p className='infor-right'>N/A</p>
                             }
-                            
+
                         </p>
                         <p className='infor'>
                             <p className='infor-left'>Diễn viên</p>
                             {
                                 phim[0].movie.actor.toString() ?
-                                <p className='infor-right'>{phim[0].movie.actor.toString()}</p>
-                                :
-                                <p className='infor-right'>N/A</p>
+                                    <p className='infor-right'>{phim[0].movie.actor.toString()}</p>
+                                    :
+                                    <p className='infor-right'>N/A</p>
                             }
-                            
+
                         </p>
                         <p className='infor'>
                             <p className='infor-left'>Thể loại</p>
                             {
                                 phim[0].movie.type.toString() ?
-                                <p className='infor-right'>{phim[0].movie.type.toString()}</p>
-                                :
-                                <p className='infor-right'>N/A</p>
+                                    <p className='infor-right'>{phim[0].movie.type.toString()}</p>
+                                    :
+                                    <p className='infor-right'>N/A</p>
                             }
-                            
+
                         </p>
                         <p className='infor'>
                             <p className='infor-left'>Quốc gia</p>
                             {
                                 phim[0].movie.country[0].name ?
-                                <p className='infor-right'>{phim[0].movie.country[0].name}</p>
-                                :
-                                <p className='infor-right'>N/A</p>
+                                    <p className='infor-right'>{phim[0].movie.country[0].name}</p>
+                                    :
+                                    <p className='infor-right'>N/A</p>
                             }
                         </p>
                     </div>
@@ -135,4 +138,4 @@ const mapStateToProps = (state) => {
     )
 }
 
-export default connect(mapStateToProps)(PhimDetail);
+export default connect(mapStateToProps)(PhimBoDetail);

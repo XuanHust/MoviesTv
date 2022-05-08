@@ -41,6 +41,9 @@ const initState = {
         { id: "6269e1b7fa02df5563cc2fa6", url: minhlan, slug: "minh-lan-truyen" },
         { id: "626ab730fa02df5563cc9b2a", url: trutien2, slug: "tru-tien-thanh-van-chi-2" },
         { id: "626fc4263a2c0c6289b9bb8e", url: thieunien, slug: "thieu-nien-tu-dai-danh-bo" },
+    ],
+    totalphim: [
+
     ]
 }
 
@@ -49,22 +52,27 @@ const rootReducer = (state = initState, action) => {
         case 'CALL_API':
             phimbo.map((item, index) => {
                 state.phimbo.push(item)
+                state.totalphim.push(item)
             })
 
             phimle.map((item, index) => {
                 state.phimle.push(item)
+                state.totalphim.push(item)
             })
 
             shows.map((item, index) => {
                 state.shows.push(item)
+                state.totalphim.push(item)
             })
 
             hoathinh.map((item, index) => {
                 state.hoathinh.push(item)
+                state.totalphim.push(item)
             })
 
             banner.map((item, index) => {
                 state.banner.push(item)
+                state.totalphim.push(item)
             })
 
             console.log("Check phim bo:", state.phimbo)
