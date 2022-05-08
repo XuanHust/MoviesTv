@@ -6,6 +6,7 @@ import {
 
 const PhimBoDetail = (props) => {
     const phim = props.dataRedux.totalphim.filter(e => e.movie._id === props.infor.movie._id)
+    // console.log("check:", phim[0])
     return (
         <div className='phimdetail-container'>
             <div className='phimdetail-content'>
@@ -15,7 +16,7 @@ const PhimBoDetail = (props) => {
                             <img src={phim[0].movie.thumb_url} alt={phim[0].movie._id}></img>
                         </p>
                         <button type='button'>
-                            <Link to={"/" + phim[0].episodes[0].server_data[0].filename + "x@"}>
+                            <Link to={"/" + phim[0].movie.slug + "1x@"}>
                                 <i class="fa-solid fa-play"></i>
                                 <p>Xem Phim</p>
                             </Link>

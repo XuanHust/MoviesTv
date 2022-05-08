@@ -12,21 +12,15 @@ import CardPhim from '../Card/cardphim'
 
 const Home = (props) => {
 
-    const [phimBo, setPhimBo] = useState()
-    const [phimLe, setPhimLe] = useState()
-    const [shows, setShows] = useState()
-    const [hoatHinh, setHoatHinh] = useState()
+    const [loadphim, setLoadphim] = useState()
 
     const loadPhim = () => {
-        setPhimBo(props.dataRedux.phimbo)
-        setPhimLe(props.dataRedux.phimle)
-        setShows(props.dataRedux.shows)
-        setHoatHinh(props.dataRedux.hoathinh)
+        setLoadphim(1)
     }
 
     useEffect(() => {
         window.addEventListener('load', loadPhim)
-    }, [])
+    })
 
     const settings = {
         arrow: true,

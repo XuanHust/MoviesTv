@@ -101,7 +101,7 @@ const Nav = (props) => {
                 {
                     props.dataRedux.totalphim.map((item, index) => {
                         return (
-                            <Route path={"/" + item.episodes[0].server_data[0].filename + "x@"} element={<Xemphim phimz={item} />} />
+                            <Route path={"/" + item.movie.slug + "1x@"} element={<Xemphim phimz={item} />} />
                         )
                     })
                 }
