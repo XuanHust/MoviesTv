@@ -91,15 +91,17 @@
                     }
                 }
                 .title-right{
-                    display: flex;
-                    align-items: center;
-                    color: #d95808;
-                    font-size: 16px;
-                    font-weight: 700;
                     cursor: pointer;
-                    i{
-                        margin-left: 5px;
-                        padding-top: 4px;
+                    a{
+                        display: flex;
+                        align-items: center;
+                        color: #d95808;
+                        font-size: 16px;
+                        font-weight: 700;
+                        i{
+                            margin-left: 5px;
+                            padding-top: 4px;
+                        }
                     }
                 }
                 .title-right:hover{

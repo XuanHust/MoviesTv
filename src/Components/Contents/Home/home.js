@@ -97,8 +97,10 @@ const Home = (props) => {
                                 <p>Phim Bộ Đặc Sắc</p>
                             </p>
                             <p className='title-right'>
-                                <p>Xem tất cả</p>
-                                <i class="fa-solid fa-angles-right"></i>
+                                <Link to="/danhsach/phimbo">
+                                    <p>Xem tất cả</p>
+                                    <i class="fa-solid fa-angles-right"></i>
+                                </Link>
                             </p>
                         </div>
                         <div className='phimbo-content'>
@@ -123,8 +125,10 @@ const Home = (props) => {
                                 <p>Phim Lẻ Đặc Sắc</p>
                             </p>
                             <p className='title-right'>
-                                <p>Xem tất cả</p>
-                                <i class="fa-solid fa-angles-right"></i>
+                                <Link to="/danhsach/phimle">
+                                    <p>Xem tất cả</p>
+                                    <i class="fa-solid fa-angles-right"></i>
+                                </Link>
                             </p>
                         </div>
                         <div className='phimbo-content'>
@@ -149,8 +153,10 @@ const Home = (props) => {
                                 <p>Shows Tổng Hợp</p>
                             </p>
                             <p className='title-right'>
-                                <p>Xem tất cả</p>
-                                <i class="fa-solid fa-angles-right"></i>
+                                <Link to="/danhsach/shows">
+                                    <p>Xem tất cả</p>
+                                    <i class="fa-solid fa-angles-right"></i>
+                                </Link>
                             </p>
                         </div>
                         <div className='phimbo-content'>
@@ -172,11 +178,13 @@ const Home = (props) => {
                         <div className='title'>
                             <p className='title-left'>
                                 <i class="fa-solid fa-baby"></i>
-                                <p>Hoạt Hình Vui Nhộnc</p>
+                                <p>Hoạt Hình Vui Nhộn</p>
                             </p>
                             <p className='title-right'>
-                                <p>Xem tất cả</p>
-                                <i class="fa-solid fa-angles-right"></i>
+                                <Link to="/danhsach/hoathinh">
+                                    <p>Xem tất cả</p>
+                                    <i class="fa-solid fa-angles-right"></i>
+                                </Link>
                             </p>
                         </div>
                         <div className='phimbo-content'>
