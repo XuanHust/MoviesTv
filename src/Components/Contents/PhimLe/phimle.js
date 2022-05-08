@@ -12,7 +12,7 @@ const Phimle = (props) => {
             <div className='phimle-content'>
                 <div className='title'>
                     <i class="fa-solid fa-folder-open"></i>
-                    <p>Phim Bộ</p>
+                    <p>Phim Lẻ</p>
                 </div>
                 <div className='selector'>
                     <select>

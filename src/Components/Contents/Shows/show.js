@@ -12,7 +12,7 @@ const Show = (props) => {
             <div className='show-content'>
                 <div className='title'>
                     <i class="fa-solid fa-folder-open"></i>
-                    <p>Phim Bộ</p>
+                    <p>Shows</p>
                 </div>
                 <div className='selector'>
                     <select>
@@ -58,8 +58,8 @@ const Show = (props) => {
                 </div>
                 <div className='showall'>
                     {
-                        props.dataRedux.show && props.dataRedux.show.length &&
-                        props.dataRedux.show.map((item, index) => {
+                        props.dataRedux.shows && props.dataRedux.shows.length &&
+                        props.dataRedux.shows.map((item, index) => {
                             return (
                                 <Link to={"/" + item.movie.slug}>
                                     <CardPhim itemPhim={item} key={index} />
