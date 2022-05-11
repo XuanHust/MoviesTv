@@ -75,10 +75,10 @@ const rootReducer = (state = initState, action) => {
                 state.banner.push(item)
                 state.totalphim.push(item)
             })
-            console.log("Check phim bo:", state.phimbo)
-            console.log("Check phim le:", state.phimle)
-            console.log("Check phim shows:", state.shows)
-            console.log("Check phim hoathinh:", state.hoathinh)
+            // console.log("Check phim bo:", state.phimbo)
+            // console.log("Check phim le:", state.phimle)
+            // console.log("Check phim shows:", state.shows)
+            // console.log("Check phim hoathinh:", state.hoathinh)
             console.log("Check phim Banner:", state.banner)
             return state
         default:

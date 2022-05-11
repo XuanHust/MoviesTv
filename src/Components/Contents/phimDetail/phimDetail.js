@@ -6,7 +6,6 @@ import {
 
 const PhimBoDetail = (props) => {
     const phim = props.dataRedux.totalphim.filter(e => e.movie._id === props.infor.movie._id)
-    // console.log("check:", phim[0])
     return (
         <div className='phimdetail-container'>
             <div className='phimdetail-content'>

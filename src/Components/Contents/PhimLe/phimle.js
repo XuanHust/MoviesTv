@@ -1,12 +1,55 @@
 import './phimle.scss'
 import { connect } from 'react-redux';
 import CardPhim from '../Card/cardphim';
+import { useState } from 'react';
 
 import {
     Link
 } from "react-router-dom";
 
 const Phimle = (props) => {
+
+    const [sapxep, setSapXep] = useState("--Sắp xếp--")
+    const [theloai, setTheLoai] = useState("--Thể loại--")
+    const [quocgia, setQuocGia] = useState("--Quốc gia--")
+    const [nam, setNam] = useState("--Năm--")
+    const [phim, setPhim] = useState(props.dataRedux.phimle)
+
+    const handleSapXep = (event) => {
+        console.log("Sap Xep:>>>", event.target.value)
+        setSapXep(event.target.value)
+    }
+    const handleTheLoai = (event) => {
+        console.log("Sap Xep:>>>", event.target.value)
+        setTheLoai(event.target.value)
+    }
+    const handleQuocGia = (event) => {
+        console.log("Sap Xep:>>>", event.target.value)
+        setQuocGia(event.target.value)
+    }
+    const handleNam = (event) => {
+        console.log("Sap Xep:>>>", event.target.value)
+        setNam(event.target.value)
+    }
+    const handle = () => {
+        
+        setPhim(props.dataRedux.phimle.filter(
+            item =>
+                (quocgia === item.movie.country[0].name && nam === `${item.movie.year}`)
+        ))
+    }
+
+    const handleClick = () => {
+        setPhim(props.dataRedux.phimle)
+        quocgia !== "--Quốc gia--" && nam !== "--Năm--" ?
+            handle()
+            :
+            setPhim(props.dataRedux.phimle.filter(
+                item => (quocgia === item.movie.country[0].name)
+                    || (nam === `${item.movie.year}`)
+            ))
+    }
+
     return (
         <div className='phimle_container'>
             <div className='phimle-content'>
@@ -15,32 +58,32 @@ const Phimle = (props) => {
                     <p>Phim Lẻ</p>
                 </div>
                 <div className='selector'>
-                    <select>
+                    <select onChange={(event) => handleSapXep(event)}>
                         <option>--Sắp xếp--</option>
                         <option>Mới cập nhật</option>
                         <option>Năm xuất bản</option>
                     </select>
-                    <select>
+                    <select onChange={(event) => handleTheLoai(event)}>
                         <option>--Thể loại--</option>
-                        <option>Hành động</option>
-                        <option>Tình cảm</option>
-                        <option>Hài hước</option>
-                        <option>Cổ trang</option>
-                        <option>Kinh dị</option>
-                        <option>Tâm lý</option>
-                        <option>Hình sự</option>
-                        <option>Thần thoại</option>
+                        <option>Hành Động</option>
+                        <option>Tình Cảm</option>
+                        <option>Hài Hước</option>
+                        <option>Cổ Trang</option>
+                        <option>Kinh Dị</option>
+                        <option>Tâm Lý</option>
+                        <option>Hình Sự</option>
+                        <option>Thần Thoại</option>
                         <option>...</option>
                     </select>
-                    <select>
+                    <select onChange={(event) => handleQuocGia(event)}>
                         <option>--Quốc gia--</option>
                         <option>Trung Quốc</option>
                         <option>Nhật Bản</option>
-                        <option>Âu mỹ</option>
+                        <option>Âu Mỹ</option>
                         <option>Anh</option>
                         <option>Pháp</option>
                     </select>
-                    <select>
+                    <select onChange={(event) => handleNam(event)}>
                         <option>--Năm--</option>
                         <option>2022</option>
                         <option>2021</option>
@@ -54,12 +97,16 @@ const Phimle = (props) => {
                         <option>2013</option>
                         <option>2012</option>
                     </select>
-                    <button type='button'>Lọc phim</button>
+                    <button type='button'
+                        onClick={() => handleClick()}
+                    >Lọc phim</button>
                 </div>
                 <div className='phimleall'>
                     {
-                        props.dataRedux.phimle && props.dataRedux.phimle.length &&
-                        props.dataRedux.phimle.map((item, index) => {
+                        phim && phim.length &&
+                        phim.map((item, index) => {
+                            // locphim.quocgia === item.movie.category[0].name &&
+
                             return (
                                 <Link to={"/" + item.movie.slug}>
                                     <CardPhim itemPhim={item} key={index} />
