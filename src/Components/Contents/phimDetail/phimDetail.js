@@ -96,8 +96,17 @@ const PhimBoDetail = (props) => {
                         <p className='infor'>
                             <p className='infor-left'>Thể loại</p>
                             {
-                                phim[0].movie.type.toString() ?
-                                    <p className='infor-right'>{phim[0].movie.type.toString()}</p>
+                                phim[0].movie.category ?
+                                // {phim[0].movie.category.toString().name}
+                                    <p className='infor-right'>
+                                        {
+                                            phim[0].movie.category.map((item, index) => {
+                                                return(
+                                                    <span>{phim[0].movie.category[index].name}, </span>
+                                                )
+                                            })
+                                        }
+                                    </p>
                                     :
                                     <p className='infor-right'>N/A</p>
                             }

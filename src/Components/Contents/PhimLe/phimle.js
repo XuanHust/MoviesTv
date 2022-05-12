@@ -1,7 +1,7 @@
 import './phimle.scss'
 import { connect } from 'react-redux';
 import CardPhim from '../Card/cardphim';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import {
     Link
@@ -16,37 +16,33 @@ const Phimle = (props) => {
     const [phim, setPhim] = useState(props.dataRedux.phimle)
 
     const handleSapXep = (event) => {
-        console.log("Sap Xep:>>>", event.target.value)
         setSapXep(event.target.value)
     }
     const handleTheLoai = (event) => {
-        console.log("Sap Xep:>>>", event.target.value)
         setTheLoai(event.target.value)
     }
     const handleQuocGia = (event) => {
-        console.log("Sap Xep:>>>", event.target.value)
         setQuocGia(event.target.value)
     }
     const handleNam = (event) => {
-        console.log("Sap Xep:>>>", event.target.value)
         setNam(event.target.value)
     }
     const handle = () => {
-        
         setPhim(props.dataRedux.phimle.filter(
             item =>
-                (quocgia === item.movie.country[0].name && nam === `${item.movie.year}`)
+                (quocgia === item.movie.country[0].name && nam === `${item.movie.year}` && theloai === item.movie.category[0].name)
         ))
     }
 
     const handleClick = () => {
         setPhim(props.dataRedux.phimle)
-        quocgia !== "--Quốc gia--" && nam !== "--Năm--" ?
+        quocgia !== "--Quốc gia--" && nam !== "--Năm--" && theloai !== "--Thể loại--" ?
             handle()
             :
             setPhim(props.dataRedux.phimle.filter(
                 item => (quocgia === item.movie.country[0].name)
                     || (nam === `${item.movie.year}`)
+                    || (theloai === item.movie.category[0].name)
             ))
     }
 
@@ -55,7 +51,7 @@ const Phimle = (props) => {
             <div className='phimle-content'>
                 <div className='title'>
                     <i class="fa-solid fa-folder-open"></i>
-                    <p>Phim Lẻ</p>
+                    <p>Phim Bộ</p>
                 </div>
                 <div className='selector'>
                     <select onChange={(event) => handleSapXep(event)}>
@@ -73,6 +69,13 @@ const Phimle = (props) => {
                         <option>Tâm Lý</option>
                         <option>Hình Sự</option>
                         <option>Thần Thoại</option>
+                        <option>Viễn Tưởng</option>
+                        <option>Gia Đình</option>
+                        <option>Khoa Học</option>
+                        <option>Chính kịch</option>
+                        <option>Tài Liệu</option>
+                        <option>Phiêu Lưu</option>
+                        <option>Chiến Tranh</option>
                         <option>...</option>
                     </select>
                     <select onChange={(event) => handleQuocGia(event)}>
@@ -105,8 +108,6 @@ const Phimle = (props) => {
                     {
                         phim && phim.length &&
                         phim.map((item, index) => {
-                            // locphim.quocgia === item.movie.category[0].name &&
-
                             return (
                                 <Link to={"/" + item.movie.slug}>
                                     <CardPhim itemPhim={item} key={index} />
