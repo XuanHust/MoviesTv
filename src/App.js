@@ -10,8 +10,8 @@ import { connect } from 'react-redux';
 
 function App(props) {
 
-  const handleLoad = () => {
-    props.callApi()
+  const handleLoad = async () => {
+    const state = await props.callApi()
   }
 
   useEffect(() => {

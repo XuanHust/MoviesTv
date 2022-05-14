@@ -14,6 +14,7 @@ const Hoathinh = (props) => {
     const [quocgia, setQuocGia] = useState("--Quốc gia--")
     const [nam, setNam] = useState("--Năm--")
     const [phim, setPhim] = useState(props.dataRedux.hoathinh)
+    const [loadphim, setLoadphim] = useState()
 
     const handleSapXep = (event) => {
         setSapXep(event.target.value)
@@ -46,6 +47,13 @@ const Hoathinh = (props) => {
             ))
     }
 
+    const loadPhim = () => {
+        setLoadphim(1)
+    }
+
+    useEffect(() => {
+        window.addEventListener('load', loadPhim)
+      }, [])
 
     return (
         <div className='hoathinh_container'>

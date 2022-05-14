@@ -14,6 +14,7 @@ const Phimle = (props) => {
     const [quocgia, setQuocGia] = useState("--Quốc gia--")
     const [nam, setNam] = useState("--Năm--")
     const [phim, setPhim] = useState(props.dataRedux.phimle)
+    const [loadphim, setLoadphim] = useState()
 
     const handleSapXep = (event) => {
         setSapXep(event.target.value)
@@ -45,6 +46,14 @@ const Phimle = (props) => {
                     || (theloai === item.movie.category[0].name)
             ))
     }
+
+    const loadPhim = () => {
+        setLoadphim(1)
+    }
+
+    useEffect(() => {
+        window.addEventListener('load', loadPhim)
+      }, [])
 
     return (
         <div className='phimle_container'>
