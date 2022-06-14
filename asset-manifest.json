@@ -1,7 +1,9 @@
 {
   "files": {
-    "main.css": "/MoviesTv/static/css/main.4f909ae1.css",
-    "main.js": "/MoviesTv/static/js/main.5208956b.js",
+    "main.css": "/MoviesTv/static/css/main.0186d5c5.css",
+    "main.js": "/MoviesTv/static/js/main.9f95e15e.js",
+    "static/media/cartoon.mp4": "/MoviesTv/static/media/cartoon.6dcbc59ce72e52e1de38.mp4",
+    "static/media/cartoon1.mp4": "/MoviesTv/static/media/cartoon1.8794fbfd0040b2e36f18.mp4",
     "static/media/trutien2.jpg": "/MoviesTv/static/media/trutien2.b7f44745320a34f61665.jpg",
     "static/media/thieunientudaidanhbo.jpg": "/MoviesTv/static/media/thieunientudaidanhbo.520b2e0a0bb9f312dbea.jpg",
     "static/media/truonghanhca.jpg": "/MoviesTv/static/media/truonghanhca.872075d2e20600a5dbf6.jpg",
@@ -25,11 +27,11 @@
     "static/media/slick.ttf": "/MoviesTv/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/MoviesTv/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/MoviesTv/index.html",
-    "main.4f909ae1.css.map": "/MoviesTv/static/css/main.4f909ae1.css.map",
-    "main.5208956b.js.map": "/MoviesTv/static/js/main.5208956b.js.map"
+    "main.0186d5c5.css.map": "/MoviesTv/static/css/main.0186d5c5.css.map",
+    "main.9f95e15e.js.map": "/MoviesTv/static/js/main.9f95e15e.js.map"
   },
   "entrypoints": [
-    "static/css/main.4f909ae1.css",
-    "static/js/main.5208956b.js"
+    "static/css/main.0186d5c5.css",
+    "static/js/main.9f95e15e.js"
   ]
 }
