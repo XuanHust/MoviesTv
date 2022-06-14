@@ -1,6 +1,6 @@
-import './show.scss'
+import './Show.scss'
 import { connect } from 'react-redux';
-import CardPhim from '../Card/cardphim';
+import CardFiml from '../cardFiml/CardFiml';
 import { useState, useEffect } from 'react';
 
 import {
@@ -9,67 +9,87 @@ import {
 
 const Show = (props) => {
 
-    const [sapxep, setSapXep] = useState("--Sắp xếp--")
-    const [theloai, setTheLoai] = useState("--Thể loại--")
-    const [quocgia, setQuocGia] = useState("--Quốc gia--")
-    const [nam, setNam] = useState("--Năm--")
-    const [phim, setPhim] = useState(props.dataRedux.shows)
-    const [loadphim, setLoadphim] = useState()
+    const [sort, setSort] = useState("--Sắp xếp--")
+    const [category, setCategory] = useState("--Thể loại--")
+    const [nation, setNation] = useState("--Quốc gia--")
+    const [year, setYear] = useState("--Năm--")
+    const [fiml, setFiml] = useState(props.dataRedux.shows)
+    const [loadFiml, setLoadFiml] = useState()
+    const [data, setData] = useState()
 
-    const handleSapXep = (event) => {
-        setSapXep(event.target.value)
+    const handleSort = (event) => {
+        setSort(event.target.value)
     }
-    const handleTheLoai = (event) => {
-        setTheLoai(event.target.value)
+    const handleCategory = (event) => {
+        setCategory(event.target.value)
     }
-    const handleQuocGia = (event) => {
-        setQuocGia(event.target.value)
+    const handleNation = (event) => {
+        setNation(event.target.value)
     }
-    const handleNam = (event) => {
-        setNam(event.target.value)
+    const handleYear = (event) => {
+        setYear(event.target.value)
     }
     const handle = () => {
-        setPhim(props.dataRedux.shows.filter(
+        setFiml(props.dataRedux.phimbo.filter(
             item =>
-                (quocgia === item.movie.country[0].name && nam === `${item.movie.year}` && theloai === item.movie.category[0].name)
+                (nation === item.movie.country[0].name && year === `${item.movie.year}` && category === item.movie.category[0].name)
         ))
     }
 
     const handleClick = () => {
-        setPhim(props.dataRedux.shows)
-        quocgia !== "--Quốc gia--" && nam !== "--Năm--" && theloai !== "--Thể loại--" ?
+        setFiml(props.dataRedux.phimbo)
+        nation !== "--Quốc gia--" && year !== "--Năm--" && category !== "--Thể loại--" ?
             handle()
             :
-            setPhim(props.dataRedux.shows.filter(
-                item => (quocgia === item.movie.country[0].name)
-                    || (nam === `${item.movie.year}`)
-                    || (theloai === item.movie.category[0].name)
+            setFiml(props.dataRedux.phimbo.filter(
+                item => (nation === item.movie.country[0].name)
+                    || (year === `${item.movie.year}`)
+                    || (category === item.movie.category[0].name)
             ))
     }
 
+    const numberOfFiml = fiml.length
+    const fimlOfPage = 12
+    const numberOfPage = Math.ceil(numberOfFiml / fimlOfPage)
+    let page = []
+    let  dataOfPage = []
+    for (let i = 0; i < numberOfPage; i++) {
+        page = [...page, i + 1]
+    }
+    const handlePage = (number) => {
+        dataOfPage = []
+        let maxNumber = fimlOfPage*number
+        if(fimlOfPage*number > fiml.length){
+            maxNumber = fiml.length
+        }
+        for (let j = fimlOfPage * (number - 1); j < maxNumber; j++) {
+            dataOfPage = [...dataOfPage, fiml[j]]
+        }
+        setData(dataOfPage)
+    }
+
     const loadPhim = () => {
-        setLoadphim(1)
+        setLoadFiml(1)
     }
 
     useEffect(() => {
         window.addEventListener('load', loadPhim)
-      }, [])
-
+    }, [])
 
     return (
-        <div className='show_container'>
-            <div className='show-content'>
+        <div className='phimbo_container'>
+            <div className='phimbo-content'>
                 <div className='title'>
                     <i class="fa-solid fa-folder-open"></i>
                     <p>Phim Bộ</p>
                 </div>
                 <div className='selector'>
-                    <select onChange={(event) => handleSapXep(event)}>
+                    <select onChange={(event) => handleSort(event)}>
                         <option>--Sắp xếp--</option>
                         <option>Mới cập nhật</option>
                         <option>Năm xuất bản</option>
                     </select>
-                    <select onChange={(event) => handleTheLoai(event)}>
+                    <select onChange={(event) => handleCategory(event)}>
                         <option>--Thể loại--</option>
                         <option>Hành Động</option>
                         <option>Tình Cảm</option>
@@ -88,7 +108,7 @@ const Show = (props) => {
                         <option>Chiến Tranh</option>
                         <option>...</option>
                     </select>
-                    <select onChange={(event) => handleQuocGia(event)}>
+                    <select onChange={(event) => handleNation(event)}>
                         <option>--Quốc gia--</option>
                         <option>Trung Quốc</option>
                         <option>Nhật Bản</option>
@@ -96,7 +116,7 @@ const Show = (props) => {
                         <option>Anh</option>
                         <option>Pháp</option>
                     </select>
-                    <select onChange={(event) => handleNam(event)}>
+                    <select onChange={(event) => handleYear(event)}>
                         <option>--Năm--</option>
                         <option>2022</option>
                         <option>2021</option>
@@ -112,19 +132,41 @@ const Show = (props) => {
                     </select>
                     <button type='button'
                         onClick={() => handleClick()}
-                    >Lọc phim</button>
+                    >Lọc fiml</button>
                 </div>
-                <div className='showall'>
+                <div className='phimboall'>
                     {
-                        phim && phim.length &&
-                        phim.map((item, index) => {
+                        data && data.length ?
+                        data.map((item, index) => {
                             return (
                                 <Link to={"/" + item.movie.slug}>
-                                    <CardPhim itemPhim={item} key={index} />
+                                    <CardFiml itemPhim={item} key={index} />
                                 </Link>
                             )
                         })
+                        :
+                        fiml.map((item, index) => {
+                            if(index < 12){
+                                return (
+                                    <Link to={"/" + item.movie.slug}>
+                                        <CardFiml itemPhim={item} key={index} />
+                                    </Link>
+                                )
+                            }
+                        })
                     }
+                </div>
+                <div className='pagination'>
+                    <a href={`#a`}>&laquo;</a>
+                    {
+                        page && page.length &&
+                        page.map((item, index) => {
+                            return (
+                                <a href={`#page${item}`} onClick={() => handlePage(item)} >{item}</a>
+                            )
+                        })
+                    }
+                    <a href="#a">&raquo;</a>
                 </div>
             </div>
         </div>

@@ -6,32 +6,33 @@ import {
     Route,
     Link
 } from "react-router-dom";
-import Phimbo from "../Contents/PhimBo/phimbo";
-import Phimle from "../Contents/PhimLe/phimle";
-import Hoathinh from "../Contents/HoatHinh/hoathinh";
-import Show from "../Contents/Shows/show";
-import Home from "../Contents/Home/home";
-import "./nav.scss"
-import PhimDetail from "../Contents/phimDetail/phimDetail";
+import SeriesFiml from "../contents/seriesFiml/SeriesFiml";
+import OddFiml from "../contents/oddFiml/OddFiml";
+import Cartoon from "../contents/cartoon/Cartoon";
+import Show from "../contents/shows/Show";
+import Home from "../contents/home/Home";
+import "./Nav.scss"
+import FimlDetail from "../contents/fimlDetail/FimlDetail";
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import Xemphim from "../Contents/phimDetail/xemphim";
+import WatchFiml from "../contents/fimlDetail/WatchFiml";
+import cartoon1 from "../../assets/audio/cartoon1.mp4"
 
 const Nav = (props) => {
 
-    const [phimBo, setPhimBo] = useState()
-    const [phimLe, setPhimLe] = useState()
+    const [seriesFiml, setSeriesFiml] = useState()
+    const [oddFiml, setOddFiml] = useState()
     const [shows, setShows] = useState()
-    const [hoatHinh, setHoatHinh] = useState()
+    const [category, setCategory] = useState()
 
     const loadPhim = () => {
-        setPhimBo(props.dataRedux.phimbo)
-        setPhimLe(props.dataRedux.phimle)
+        setSeriesFiml(props.dataRedux.phimbo)
+        setOddFiml(props.dataRedux.phimle)
         setShows(props.dataRedux.shows)
-        setHoatHinh(props.dataRedux.hoathinh)
+        setCategory(props.dataRedux.hoathinh)
     }
 
-    const phims = props.dataRedux.totalphim.filter(e => e.movie._id === props.dataRedux.listBanner.id)
+    const fimls = props.dataRedux.totalphim.filter(e => e.movie._id === props.dataRedux.listBanner.id)
 
     useEffect(() => {
         window.addEventListener('load', loadPhim)
@@ -84,40 +85,38 @@ const Nav = (props) => {
             </div>
 
             <Routes>
-                <Route path="/danhsach/phimbo" element={<Phimbo />} />
-                <Route path="danhsach/phimle" element={<Phimle />} />
+                <Route path="/danhsach/phimbo" element={<SeriesFiml />} />
+                <Route path="danhsach/phimle" element={<OddFiml />} />
                 <Route path="/danhsach/shows" element={<Show />} />
-                <Route path="/danhsach/hoathinh" element={<Hoathinh />} />
+                <Route path="/danhsach/hoathinh" element={<Cartoon />} />
                 <Route path="/MoviesTv" element={<Home />} />
                 {
-                    phims.map((item, index) => {
+                    fimls &&
+                    fimls.map((item, index) => {
                         return (
-                            <Route path={'/' + item.movie.slug} element={<PhimDetail infor={item} />} />
+                            <Route path={'/' + item.movie.slug} element={<FimlDetail infor={item} />} />
                         )
                     })
                 }
-
-
-                {
-                    props.dataRedux.totalphim.map((item, index) => {
-                        return (
-                            <Route path={"/" + item.movie.slug + "1x@"} element={<Xemphim phimz={item} />} />
-                        )
-                    })
-                }
-
 
 
                 {
                     props.dataRedux.totalphim &&
                     props.dataRedux.totalphim.map((item, index) => {
                         return (
-                            <Route path={"/" + item.movie.slug} element={<PhimDetail infor={item} />} />
+                            <Route path={"/" + item.movie.slug + "/movietv@"} element={<WatchFiml phimz={item} />} />
                         )
                     })
                 }
 
-
+                {
+                    props.dataRedux.totalphim &&
+                    props.dataRedux.totalphim.map((item, index) => {
+                        return (
+                            <Route path={"/" + item.movie.slug} element={<FimlDetail infor={item} />} />
+                        )
+                    })
+                }
             </Routes>
         </Router>
     )

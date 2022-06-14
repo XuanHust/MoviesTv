@@ -1,31 +1,31 @@
 import { useState, useEffect } from "react";
-import phimbo from '../../Data/PhimBo/phimbo.json'
-import phimle from '../../Data/PhimLe/phimle.json'
-import shows from '../../Data/Shows/shows.json'
-import hoathinh from '../../Data/HoatHinh/hoathinh.json'
-import banner from '../../Data/Banner/banner.json'
+import seriesFiml from '../../datas/seriesFiml/seriesFiml.json'
+import oddFiml from '../../datas/oddFiml/oddFiml.json'
+import shows from '../../datas/shows/shows.json'
+import cartoon from '../../datas/cartoon/cartoon.json'
+import banner from '../../datas/banner/banner.json'
 
-import truonghanhca from '../../Assets/Images/truonghanhca.jpg'
-import ngocrong from '../../Assets/Images/7vienngocrong.jpg'
-import chienbinhmuadong from '../../Assets/Images/chienbinhmuadong.jpg'
-import chuatechiecnhan from '../../Assets/Images/chuatechiecnhan.jpg'
-import kingsman from '../../Assets/Images/kingsman.jpg'
-import loki1 from '../../Assets/Images/loki1.jpg'
-import minhlan from '../../Assets/Images/minhlan.jpg'
-import trutien2 from '../../Assets/Images/trutien2.jpg'
-import thieunien from '../../Assets/Images/thieunientudaidanhbo.jpg'
+import truonghanhca from '../../assets/images/truonghanhca.jpg'
+import ngocrong from '../../assets/images/7vienngocrong.jpg'
+import chienbinhmuadong from '../../assets/images/chienbinhmuadong.jpg'
+import chuatechiecnhan from '../../assets/images/chuatechiecnhan.jpg'
+import kingsman from '../../assets/images/kingsman.jpg'
+import loki1 from '../../assets/images/loki1.jpg'
+import minhlan from '../../assets/images/minhlan.jpg'
+import trutien2 from '../../assets/images/trutien2.jpg'
+import thieunien from '../../assets/images/thieunientudaidanhbo.jpg'
 
 const initState = {
-    phimbo: [
+    seriesFiml: [
 
     ],
-    phimle: [
+    oddFiml: [
 
     ],
     shows: [
 
     ],
-    hoathinh: [
+    cartoon: [
 
     ],
     banner: [
@@ -44,20 +44,23 @@ const initState = {
     ],
     totalphim: [
 
-    ]
+    ],
+    fimlCurrent: [
+
+    ],
 }
 
 const rootReducer = (state = initState, action) => {
     switch (action.type) {
         case 'CALL_API':
-            phimbo.map((item, index) => {
-                state.phimbo.push(item)
+            seriesFiml.map((item, index) => {
+                state.seriesFiml.push(item)
                 state.totalphim.push(item)
             })
 
-            phimle.map((item, index) => {
+            oddFiml.map((item, index) => {
                 state.totalphim.push(item)
-                state.phimle.push(item)
+                state.oddFiml.push(item)
 
             })
 
@@ -66,8 +69,8 @@ const rootReducer = (state = initState, action) => {
                 state.totalphim.push(item)
             })
 
-            hoathinh.map((item, index) => {
-                state.hoathinh.push(item)
+            cartoon.map((item, index) => {
+                state.cartoon.push(item)
                 state.totalphim.push(item)
             })
 
@@ -75,11 +78,13 @@ const rootReducer = (state = initState, action) => {
                 state.banner.push(item)
                 state.totalphim.push(item)
             })
-            console.log("Check phim bo:", state.phimbo)
-            // console.log("Check phim le:", state.phimle)
-            // console.log("Check phim shows:", state.shows)
-            // console.log("Check phim hoathinh:", state.hoathinh)
-            // console.log("Check phim Banner:", state.banner)
+            console.log("Check phim bo:", state.seriesFiml)
+            return state
+        case "EPISODE_CURRENT":
+            const current = []
+            state.fimlCurrent = current
+            state.fimlCurrent = action.payload
+            console.log("fimlCurrent", state.fimlCurrent)
             return state
         default:
             return state;

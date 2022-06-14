@@ -1,4 +1,4 @@
-import './home.scss'
+import './Home.scss'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -8,14 +8,14 @@ import { useEffect, useState } from 'react'
 import {
     Link
 } from "react-router-dom";
-import CardPhim from '../Card/cardphim'
+import CardFiml from '../cardFiml/CardFiml'
 
 const Home = (props) => {
 
-    const [loadphim, setLoadphim] = useState()
+    const [loadFiml, setLoadFiml] = useState()
 
     const loadPhim = () => {
-        setLoadphim(1)
+        setLoadFiml(1)
     }
 
     useEffect(() => {
@@ -99,12 +99,12 @@ const Home = (props) => {
                         </div>
                         <div className='phimbo-content'>
                             {
-                                props.dataRedux.phimbo && props.dataRedux.phimbo.length &&
-                                props.dataRedux.phimbo.map((item, index) => {
+                                props.dataRedux.seriesFiml && props.dataRedux.seriesFiml.length &&
+                                props.dataRedux.seriesFiml.map((item, index) => {
                                     return (
                                         index < 8 &&
                                         <Link to={"/" + item.movie.slug}>
-                                            <CardPhim itemPhim={item} key={index} />
+                                            <CardFiml itemPhim={item} key={index} />
                                         </Link>
                                     )
                                 })
@@ -127,12 +127,12 @@ const Home = (props) => {
                         </div>
                         <div className='phimbo-content'>
                             {
-                                props.dataRedux.phimle && props.dataRedux.phimle.length &&
-                                props.dataRedux.phimle.map((item, index) => {
+                                props.dataRedux.oddFiml && props.dataRedux.oddFiml.length &&
+                                props.dataRedux.oddFiml.map((item, index) => {
                                     return (
                                         index < 8 &&
                                         <Link to={"/" + item.movie.slug}>
-                                            <CardPhim itemPhim={item} key={index} />
+                                            <CardFiml itemPhim={item} key={index} />
                                         </Link>
                                     )
                                 })
@@ -160,7 +160,7 @@ const Home = (props) => {
                                     return (
                                         index < 8 &&
                                         <Link to={"/" + item.movie.slug}>
-                                            <CardPhim itemPhim={item} key={index} />
+                                            <CardFiml itemPhim={item} key={index} />
                                         </Link>
                                     )
                                 })
@@ -183,12 +183,12 @@ const Home = (props) => {
                         </div>
                         <div className='phimbo-content'>
                             {
-                                props.dataRedux.hoathinh && props.dataRedux.hoathinh.length &&
-                                props.dataRedux.hoathinh.map((item, index) => {
+                                props.dataRedux.cartoon && props.dataRedux.cartoon.length &&
+                                props.dataRedux.cartoon.map((item, index) => {
                                     return (
                                         index < 8 &&
                                         <Link to={"/" + item.movie.slug}>
-                                            <CardPhim itemPhim={item} key={index} />
+                                            <CardFiml itemPhim={item} key={index} />
                                         </Link>
                                     )
                                 })
