@@ -5,13 +5,13 @@ const CardFiml = (props) => {
         <div className='cardPhim'>
             <div className='cardphim-conent'>
                 <p className='img'>
-                    <img src={props.itemPhim.movie.thumb_url} alt={props.itemPhim.movie.name}></img>
+                    <img src={props.itemPhim.thumb_url} alt={props.itemPhim.name}></img>
                 </p>
                 <p className='nametv'>
-                    {props.itemPhim.movie.name}
+                    {props.itemPhim.name}
                 </p>
                 <p className='nameta'>
-                    {props.itemPhim.movie.origin_name}
+                    {props.itemPhim.origin_name}
                 </p>
             </div>
         </div>

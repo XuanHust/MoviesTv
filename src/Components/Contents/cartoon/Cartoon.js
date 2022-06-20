@@ -13,7 +13,7 @@ const Cartoon = (props) => {
     const [category, setCategory] = useState("--Thể loại--")
     const [nation, setNation] = useState("--Quốc gia--")
     const [year, setYear] = useState("--Năm--")
-    const [fiml, setFiml] = useState(props.dataRedux.cartoon)
+    const [fiml, setFiml] = useState([])
     const [loadFiml, setLoadFiml] = useState()
     const [data, setData] = useState()
 
@@ -30,18 +30,18 @@ const Cartoon = (props) => {
         setYear(event.target.value)
     }
     const handle = () => {
-        setFiml(props.dataRedux.phimbo.filter(
+        setFiml(props.dataRedux.cartoon.filter(
             item =>
                 (nation === item.movie.country[0].name && year === `${item.movie.year}` && category === item.movie.category[0].name)
         ))
     }
 
     const handleClick = () => {
-        setFiml(props.dataRedux.phimbo)
+        setFiml(props.dataRedux.cartoon)
         nation !== "--Quốc gia--" && year !== "--Năm--" && category !== "--Thể loại--" ?
             handle()
             :
-            setFiml(props.dataRedux.phimbo.filter(
+            setFiml(props.dataRedux.cartoon.filter(
                 item => (nation === item.movie.country[0].name)
                     || (year === `${item.movie.year}`)
                     || (category === item.movie.category[0].name)
@@ -52,14 +52,14 @@ const Cartoon = (props) => {
     const fimlOfPage = 12
     const numberOfPage = Math.ceil(numberOfFiml / fimlOfPage)
     let page = []
-    let  dataOfPage = []
+    let dataOfPage = []
     for (let i = 0; i < numberOfPage; i++) {
         page = [...page, i + 1]
     }
     const handlePage = (number) => {
         dataOfPage = []
-        let maxNumber = fimlOfPage*number
-        if(fimlOfPage*number > fiml.length){
+        let maxNumber = fimlOfPage * number
+        if (fimlOfPage * number > fiml.length) {
             maxNumber = fiml.length
         }
         for (let j = fimlOfPage * (number - 1); j < maxNumber; j++) {
@@ -68,12 +68,11 @@ const Cartoon = (props) => {
         setData(dataOfPage)
     }
 
-    const loadPhim = () => {
-        setLoadFiml(1)
-    }
-
     useEffect(() => {
-        window.addEventListener('load', loadPhim)
+        fetch('http://localhost:8080/cartoon')
+            .then(response => response.json())
+            .then(response => setFiml(response))
+            .catch(error => console.error(error))
     }, [])
 
     return (
@@ -137,23 +136,23 @@ const Cartoon = (props) => {
                 <div className='phimboall'>
                     {
                         data && data.length ?
-                        data.map((item, index) => {
-                            return (
-                                <Link to={"/" + item.movie.slug}>
-                                    <CardFiml itemPhim={item} key={index} />
-                                </Link>
-                            )
-                        })
-                        :
-                        fiml.map((item, index) => {
-                            if(index < 12){
+                            data.map((item, index) => {
                                 return (
-                                    <Link to={"/" + item.movie.slug}>
+                                    <Link to={"/" + item.slug}>
                                         <CardFiml itemPhim={item} key={index} />
                                     </Link>
                                 )
-                            }
-                        })
+                            })
+                            :
+                            fiml.map((item, index) => {
+                                if (index < 12) {
+                                    return (
+                                        <Link to={"/" + item.slug}>
+                                            <CardFiml itemPhim={item} key={index} />
+                                        </Link>
+                                    )
+                                }
+                            })
                     }
                 </div>
                 <div className='pagination'>

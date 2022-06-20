@@ -23,19 +23,24 @@ const Nav = (props) => {
     const [seriesFiml, setSeriesFiml] = useState()
     const [oddFiml, setOddFiml] = useState()
     const [shows, setShows] = useState()
-    const [category, setCategory] = useState()
+    const [cartoon, setCartoon] = useState()
+    const [totalFiml, setTotalFiml] = useState([])
 
     const loadPhim = () => {
-        setSeriesFiml(props.dataRedux.phimbo)
-        setOddFiml(props.dataRedux.phimle)
+
+        setSeriesFiml(props.dataRedux.seriesFiml)
+        setOddFiml(props.dataRedux.oddFiml)
         setShows(props.dataRedux.shows)
-        setCategory(props.dataRedux.hoathinh)
+        setCartoon(props.dataRedux.cartoon)
     }
 
     const fimls = props.dataRedux.totalphim.filter(e => e.movie._id === props.dataRedux.listBanner.id)
 
     useEffect(() => {
-        window.addEventListener('load', loadPhim)
+        fetch('http://localhost:8080/totalFiml')
+            .then(response => response.json())
+            .then(response => setTotalFiml(response))
+            .catch(error => console.error(error))
     }, [])
 
     return (
@@ -110,10 +115,10 @@ const Nav = (props) => {
                 }
 
                 {
-                    props.dataRedux.totalphim &&
-                    props.dataRedux.totalphim.map((item, index) => {
+                    totalFiml && totalFiml.length &&
+                    totalFiml.map((item, index) => {
                         return (
-                            <Route path={"/" + item.movie.slug} element={<FimlDetail infor={item} />} />
+                            <Route path={"/" + item.slug} element={<FimlDetail infor={item} />} />
                         )
                     })
                 }

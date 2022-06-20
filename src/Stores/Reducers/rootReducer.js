@@ -78,13 +78,13 @@ const rootReducer = (state = initState, action) => {
                 state.banner.push(item)
                 state.totalphim.push(item)
             })
-            console.log("Check phim bo:", state.seriesFiml)
+            // console.log("Check phim bo:", state.seriesFiml)
             return state
         case "EPISODE_CURRENT":
             const current = []
             state.fimlCurrent = current
             state.fimlCurrent = action.payload
-            console.log("fimlCurrent", state.fimlCurrent)
+            // console.log("fimlCurrent", state.fimlCurrent)
             return state
         default:
             return state;

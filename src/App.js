@@ -4,25 +4,32 @@ import Content from './components/contents/Content';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import Nav from './components/navigator/Nav';
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
+import Login from './components/login/Login';
 
 
 function App(props) {
 
-  const handleLoad = async () => {
-    const state = await props.callApi()
+  const [apiRes, setApiRes] = useState()
+  const [login, setLogin] = useState()
+  const [err, setErr] = useState()
+
+  const handleLoad = () => {
+    const state = props.callApi()
   }
 
-  // fetch('/phim-moi-cap-nguoi-hung-tia-chop-phan-8', {
-  //   method: 'GET',
-  //   headers: {
-  //     'Content-Type': 'application/json; charset=utf-8'
-  //   }
-  // }).then(response => response.json())
-  //   .then(data => {
-  //     console.log(data)
-  //   })
+  const handleLogin = (login) => {
+    console.log("login", login)
+    login.username === "admin" && login.password === "admin" ?
+      setLogin(true)
+      :
+      setErr("Username or password not corect!")
+  }
+
+  // fetch('http://localhost:8080/testApi')
+  //   .then(response => response.json())
+  //   .then(response => console.log(response))
   //   .catch(error => console.error(error))
 
   useEffect(() => {
@@ -31,10 +38,20 @@ function App(props) {
 
   return (
     <div className="App">
-      <Header />
-      <Nav />
-      <Content />
-      <Footer />
+      {
+        // login ?
+          <>
+            <Header />
+            <Nav />
+            <Content />
+            <Footer />
+          </>
+          // :
+          // <>
+          //   < Login handleLogin={handleLogin} err={err} />
+          // </>
+
+      }
     </div>
   );
 }

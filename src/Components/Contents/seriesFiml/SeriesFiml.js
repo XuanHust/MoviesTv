@@ -13,7 +13,7 @@ const SeriesFiml = (props) => {
     const [category, setCategory] = useState("--Thể loại--")
     const [nation, setNation] = useState("--Quốc gia--")
     const [year, setYear] = useState("--Năm--")
-    const [fiml, setFiml] = useState(props.dataRedux.seriesFiml)
+    const [fiml, setFiml] = useState([])
     const [loadFiml, setLoadFiml] = useState()
     const [data, setData] = useState()
 
@@ -30,18 +30,18 @@ const SeriesFiml = (props) => {
         setYear(event.target.value)
     }
     const handle = () => {
-        setFiml(props.dataRedux.phimbo.filter(
+        setFiml(props.dataRedux.seriesFiml.filter(
             item =>
                 (nation === item.movie.country[0].name && year === `${item.movie.year}` && category === item.movie.category[0].name)
         ))
     }
 
     const handleClick = () => {
-        setFiml(props.dataRedux.phimbo)
+        setFiml(props.dataRedux.seriesFiml)
         nation !== "--Quốc gia--" && year !== "--Năm--" && category !== "--Thể loại--" ?
             handle()
             :
-            setFiml(props.dataRedux.phimbo.filter(
+            setFiml(props.dataRedux.seriesFiml.filter(
                 item => (nation === item.movie.country[0].name)
                     || (year === `${item.movie.year}`)
                     || (category === item.movie.category[0].name)
@@ -68,12 +68,11 @@ const SeriesFiml = (props) => {
         setData(dataOfPage)
     }
 
-    const loadPhim = () => {
-        setLoadFiml(1)
-    }
-
     useEffect(() => {
-        window.addEventListener('load', loadPhim)
+        fetch('http://localhost:8080/seriesFiml')
+        .then(response => response.json())
+        .then(response => setFiml(response))
+        .catch(error => console.error(error))
     }, [])
 
     return (
@@ -139,7 +138,7 @@ const SeriesFiml = (props) => {
                         data && data.length ?
                         data.map((item, index) => {
                             return (
-                                <Link to={"/" + item.movie.slug}>
+                                <Link to={"/" + item.slug}>
                                     <CardFiml itemPhim={item} key={index} />
                                 </Link>
                             )
@@ -148,7 +147,7 @@ const SeriesFiml = (props) => {
                         fiml.map((item, index) => {
                             if(index < 12){
                                 return (
-                                    <Link to={"/" + item.movie.slug}>
+                                    <Link to={"/" + item.slug}>
                                         <CardFiml itemPhim={item} key={index} />
                                     </Link>
                                 )

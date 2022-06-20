@@ -12,15 +12,32 @@ import CardFiml from '../cardFiml/CardFiml'
 
 const Home = (props) => {
 
-    const [loadFiml, setLoadFiml] = useState()
-
-    const loadPhim = () => {
-        setLoadFiml(1)
-    }
+    const [seriesFiml, setSeriesFiml] = useState([])
+    const [oddFiml, setOddFiml] = useState([])
+    const [shows, setShows] = useState([])
+    const [cartoon, setCartoon] = useState([])
 
     useEffect(() => {
-        window.addEventListener('load', loadPhim)
-    })
+        fetch('http://localhost:8080/seriesFiml')
+            .then(response => response.json())
+            .then(response => setSeriesFiml(response))
+            .catch(error => console.error(error))
+
+        fetch('http://localhost:8080/oddFiml')
+            .then(response => response.json())
+            .then(response => setOddFiml(response))
+            .catch(error => console.error(error))
+
+        fetch('http://localhost:8080/shows')
+            .then(response => response.json())
+            .then(response => setShows(response))
+            .catch(error => console.error(error))
+
+        fetch('http://localhost:8080/cartoon')
+            .then(response => response.json())
+            .then(response => setCartoon(response))
+            .catch(error => console.error(error))
+    }, [])
 
     const settings = {
         arrow: true,
@@ -99,11 +116,11 @@ const Home = (props) => {
                         </div>
                         <div className='phimbo-content'>
                             {
-                                props.dataRedux.seriesFiml && props.dataRedux.seriesFiml.length &&
-                                props.dataRedux.seriesFiml.map((item, index) => {
+                                seriesFiml && seriesFiml.length &&
+                                seriesFiml.map((item, index) => {
                                     return (
                                         index < 8 &&
-                                        <Link to={"/" + item.movie.slug}>
+                                        <Link to={"/" + item.slug}>
                                             <CardFiml itemPhim={item} key={index} />
                                         </Link>
                                     )
@@ -126,12 +143,12 @@ const Home = (props) => {
                             </p>
                         </div>
                         <div className='phimbo-content'>
-                            {
-                                props.dataRedux.oddFiml && props.dataRedux.oddFiml.length &&
-                                props.dataRedux.oddFiml.map((item, index) => {
+                        {
+                                oddFiml && oddFiml.length &&
+                                oddFiml.map((item, index) => {
                                     return (
                                         index < 8 &&
-                                        <Link to={"/" + item.movie.slug}>
+                                        <Link to={"/" + item.slug}>
                                             <CardFiml itemPhim={item} key={index} />
                                         </Link>
                                     )
@@ -155,11 +172,11 @@ const Home = (props) => {
                         </div>
                         <div className='phimbo-content'>
                             {
-                                props.dataRedux.shows && props.dataRedux.shows.length &&
-                                props.dataRedux.shows.map((item, index) => {
+                                shows && shows.length &&
+                                shows.map((item, index) => {
                                     return (
                                         index < 8 &&
-                                        <Link to={"/" + item.movie.slug}>
+                                        <Link to={"/" + item.slug}>
                                             <CardFiml itemPhim={item} key={index} />
                                         </Link>
                                     )
@@ -183,11 +200,11 @@ const Home = (props) => {
                         </div>
                         <div className='phimbo-content'>
                             {
-                                props.dataRedux.cartoon && props.dataRedux.cartoon.length &&
-                                props.dataRedux.cartoon.map((item, index) => {
+                                cartoon && cartoon.length &&
+                                cartoon.map((item, index) => {
                                     return (
                                         index < 8 &&
-                                        <Link to={"/" + item.movie.slug}>
+                                        <Link to={"/" + item.slug}>
                                             <CardFiml itemPhim={item} key={index} />
                                         </Link>
                                     )
